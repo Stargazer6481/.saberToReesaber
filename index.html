@@ -6,8 +6,17 @@
     <title>ReeSaber Converter (BETA)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #050505;
+            --container-bg: #111111;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --accent-color: #ffffff;
+            --border-color: #333333;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,9 +24,9 @@
         }
 
         body {
-            font-family: 'Space Grotesk', monospace;
-            background: #000000;
-            color: #ffffff;
+            font-family: 'Space Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -25,75 +34,108 @@
             padding: 40px 20px;
             position: relative;
             overflow-x: hidden;
+            /* Tech grid background */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        body::before {
-            content: '';
+        /* Subtle scanline overlay */
+        body::after {
+            content: "";
             position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 0, 100, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 150, 255, 0.05) 0%, transparent 50%);
-            animation: rotate 20s linear infinite;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
             pointer-events: none;
-        }
-
-        @keyframes rotate {
-            100% { transform: rotate(360deg); }
+            z-index: 0;
         }
 
         .container {
-            background: rgba(15, 15, 15, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            background: var(--container-bg);
+            /* Sharp borders for tech feel */
+            border: 2px solid var(--accent-color);
+            border-radius: 0; 
             max-width: 750px;
             width: 100%;
-            padding: 50px;
+            padding: 40px;
             position: relative;
             z-index: 1;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
         }
 
-        /* NEW: Dev Warning Banner */
+        /* Tech-style corner ornamentation */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -6px; left: -6px;
+            width: 20px; height: 20px;
+            border-top: 2px solid var(--accent-color);
+            border-left: 2px solid var(--accent-color);
+        }
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: -6px; right: -6px;
+            width: 20px; height: 20px;
+            border-bottom: 2px solid var(--accent-color);
+            border-right: 2px solid var(--accent-color);
+        }
+
         .dev-banner {
-            background: rgba(255, 166, 0, 0.1);
-            border: 1px solid #ffa600;
-            color: #ffa600;
+            /* High contrast B&W warning */
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: 1px solid var(--accent-color);
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 0;
             margin-bottom: 30px;
-            font-size: 0.9em;
-            text-align: center;
+            font-size: 0.85em;
+            text-align: left;
             line-height: 1.4;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2.5em;
             font-weight: 700;
-            background: linear-gradient(135deg, #ff0066, #3700ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background: none;
+            -webkit-text-fill-color: initial;
+            color: var(--accent-color);
             margin-bottom: 10px;
-            letter-spacing: -2px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
+        
+        /* Blinking cursor effect */
+        h1::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
 
         .subtitle {
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--text-dim);
             margin-bottom: 40px;
-            font-size: 1em;
-            letter-spacing: 0.5px;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 60px 30px;
+            border: 2px dashed var(--border-color);
+            border-radius: 0;
+            padding: 50px 30px;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             cursor: pointer;
             background: rgba(255, 255, 255, 0.02);
             margin-bottom: 25px;
@@ -102,57 +144,111 @@
         }
 
         .upload-area:hover {
-            border-color: #ff0066;
-            background: rgba(255, 0, 102, 0.05);
-            transform: translateY(-2px);
+            border-color: var(--accent-color);
+            background: var(--accent-color);
+            color: var(--bg-color);
         }
 
         .upload-text {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-bottom: 10px;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .upload-hint {
+            font-size: 0.85em;
+            opacity: 0.7;
+        }
+        .upload-area:hover .upload-hint {
+            opacity: 1;
         }
 
         #fileInput { display: none; }
 
         .file-info {
-            background: rgba(255, 0, 102, 0.1);
-            padding: 20px;
-            border-radius: 8px;
+            background: var(--container-bg);
+            padding: 15px;
+            border: 1px solid var(--accent-color);
+            border-radius: 0;
             margin-bottom: 25px;
             display: none;
-            border-left: 3px solid #ff0066;
+            font-size: 0.9em;
         }
 
-        .file-info.show { display: block; animation: slideIn 0.3s ease; }
+        .file-info.show { display: block; }
 
         .btn {
             width: 100%;
             padding: 18px;
-            border: none;
-            border-radius: 8px;
+            border: 2px solid var(--accent-color);
+            border-radius: 0;
             font-size: 1em;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Space Grotesk', monospace;
-            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--bg-color);
+            color: var(--accent-color);
+            position: relative;
+            top: 0;
         }
 
-        .btn-primary { background: linear-gradient(135deg, #ff0066, #ff3385); color: white; }
-        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 0, 102, 0.4); }
-        .btn:disabled { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.3); cursor: not-allowed; }
+        .btn-primary:hover:not(:disabled) {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            top: 2px;
+        }
 
-        .status { margin-top: 25px; padding: 18px; border-radius: 8px; display: none; }
+        .btn:disabled {
+            background: #222;
+            border-color: #444;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 25px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            display: none;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
         .status.show { display: block; }
-        .status.processing { background: rgba(0, 150, 255, 0.1); color: #0096ff; border-left: 3px solid #6200ff; }
-        .status.success { background: rgba(0, 255, 100, 0.1); color: #00ff64; border-left: 3px solid #00ff64; }
-        .status.error { background: rgba(255, 0, 102, 0.1); color: #ff0066; border-left: 3px solid #ff0066; }
+        /* Monochromatic status indicators */
+        .status.processing { background: #111; color: var(--text-main); border-left: 5px solid var(--text-dim); }
+        .status.success { background: #111; color: var(--text-main); border-left: 5px solid var(--accent-color); }
+        .status.error { background: #fff; color: #000; border-left: 5px solid #000; font-weight: bold;}
 
-        /* Progress Bar */
-        .progress-bar { width: 100%; height: 3px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; margin-top: 25px; display: none; }
+        /* Progress Bar - Tech Style */
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #222;
+            border: 1px solid var(--border-color);
+            border-radius: 0;
+            margin-top: 25px;
+            display: none;
+            padding: 2px;
+        }
         .progress-bar.show { display: block; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #ff0066, #4c00ff); width: 0%; transition: width 0.3s ease; }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s linear;
+            /* Digital segmented look */
+            background-image: linear-gradient(90deg, transparent 0%, transparent 50%, var(--bg-color) 50%, var(--bg-color) 100%);
+            background-size: 10px 100%;
+        }
 
         /* Info & Status Boxes */
         .info-grid {
@@ -163,50 +259,83 @@
         }
 
         .info-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
             padding: 25px;
-            border-radius: 12px;
+            border-radius: 0;
+        }
+        /* Removed inline styles in HTML, handled here */
+        .info-box.warning-box {
+            border: 1px solid var(--accent-color);
         }
 
-        .info-box h3 { color: #6200ff; margin-bottom: 15px; font-size: 1.1em; }
-        .info-box p, .info-box li { color: rgba(255, 255, 255, 0.7); font-size: 0.9em; line-height: 1.6; margin-bottom: 8px; }
+        .info-box h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .info-box p, .info-box li {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
         .info-box ul, .info-box ol { margin-left: 20px; }
+        .info-box li { margin-bottom: 12px; }
+        .info-box strong { color: var(--text-main); }
 
         .github-link {
             display: inline-block;
             margin-top: 10px;
-            color: #ff0066;
+            color: var(--accent-color);
             text-decoration: none;
-            font-weight: 600;
-            border-bottom: 1px solid transparent;
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent-color);
             transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9em;
         }
-        .github-link:hover { border-bottom: 1px solid #ff0066; }
+        .github-link:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
 
-        .footer { margin-top: 40px; text-align: center; color: rgba(255, 255, 255, 0.3); font-size: 0.85em; }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="dev-banner">
-            ⚠️ <strong>Project Status:</strong> This tool is in active development and is currently <strong>not 100% working</strong>. 
+            [ATTENTION] <strong>Project Status:</strong> This tool is in active development and is currently <strong>not 100% working</strong>. 
             Currently, only <strong>Trails</strong> are 100% functional. Manual tweaking will be required.
         </div>
 
         <h1>.saber to ReeSaber</h1>
-        <p class="subtitle">Convert legacy custom sabers to ReeSaber presets</p>
+        <p class="subtitle">Convert custom .sabers to ReeSaber presets</p>
 
         <div class="upload-area" id="uploadArea">
-            <div class="upload-text">Drop your .saber file here</div>
-            <div class="upload-hint">or click to browse</div>
+            <div class="upload-text">Drop your .saber file here </div>
+            <div class="upload-hint">or click to browse system</div>
         </div>
 
         <input type="file" id="fileInput" accept=".saber">
 
         <div class="file-info" id="fileInfo">
-            <div class="file-name" id="fileName"></div>
-            <div class="file-size" id="fileSize"></div>
+            > SELECTED_FILE: <span id="fileName"></span><br>
+            > FILE_SIZE: <span id="fileSize"></span>
         </div>
 
         <button class="btn btn-primary" id="convertBtn" disabled>CONVERT</button>
@@ -218,8 +347,8 @@
         <div class="status" id="status"></div>
 
         <div class="info-grid">
-            <div class="info-box" style="border-left: 3px solid #ff0066;">
-                <h3>Current Limitations & Notes</h3>
+            <div class="info-box warning-box">
+                <h3>> Current Limitations & Notes</h3>
                 <ul>
                     <li><strong>Manual Tweaking:</strong> You will likely need to edit the generated presets to get them perfect. Simpler sabers require much less work.</li>
                     <li><strong>Positioning:</strong> Due to how UnityPy unpacks assets, models will only be perfectly positioned if the original creator centered everything at <code>0,0,0</code>.</li>
@@ -229,7 +358,7 @@
             </div>
 
             <div class="info-box">
-                <h3>How to Use</h3>
+                <h3>> How to Use</h3>
                 <ol>
                     <li>Upload a legacy <code>.saber</code> file.</li>
                     <li>Click <strong>CONVERT</strong> and download the resulting ZIP.</li>
@@ -238,10 +367,10 @@
                 </ol>
             </div>
 
-            <div class="info-box" style="border-top: 1px solid rgba(0, 255, 100, 0.2);">
-                <h3>Help Improve the Project</h3>
-                <p>Development is ongoing! If you have experience with Unity asset unpacking or C#, your help is highly encouraged.</p>
-                <a href="https://github.com/Stargazer6481/.saberToReesaber" target="_blank" class="github-link">View on GitHub →</a>
+            <div class="info-box">
+                <h3>> Help Improve the Project</h3>
+                <p>Development is ongoing. If you have experience with Unity asset unpacking or C#, your help is highly encouraged.</p>
+                <a href="https://github.com/Stargazer6481/.saberToReesaber" target="_blank" class="github-link">View on GitHub</a>
             </div>
         </div>
 
@@ -269,15 +398,26 @@
 
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = "#ff0066";
+            // Tech style hover effect in JS
+            uploadArea.style.borderColor = "#ffffff";
+            uploadArea.style.backgroundColor = "#ffffff";
+            uploadArea.style.color = "#000000";
         });
 
         uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = "rgba(255, 255, 255, 0.2)";
+            // Reset style
+            uploadArea.style.borderColor = "var(--border-color)";
+            uploadArea.style.backgroundColor = "rgba(255, 255, 255, 0.02)";
+            uploadArea.style.color = "var(--text-main)";
         });
 
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
+             // Reset style on drop
+             uploadArea.style.borderColor = "var(--border-color)";
+            uploadArea.style.backgroundColor = "rgba(255, 255, 255, 0.02)";
+            uploadArea.style.color = "var(--text-main)";
+
             const files = e.dataTransfer.files;
             if (files.length > 0) handleFile(files[0]);
         });
@@ -288,7 +428,7 @@
 
         function handleFile(file) {
             if (!file.name.endsWith('.saber')) {
-                showStatus('Please select a .saber file', 'error');
+                showStatus('ERROR: Invalid file type. Please select a .saber file.', 'error');
                 return;
             }
             selectedFile = file;
@@ -302,7 +442,8 @@
         convertBtn.addEventListener('click', async () => {
             if (!selectedFile) return;
             convertBtn.disabled = true;
-            showStatus('Processing with UnityPy...', 'processing');
+            convertBtn.textContent = "PROCESSING...";
+            showStatus('STATUS: Processing with UnityPy executable...', 'processing');
             progressBar.classList.add('show');
             progressFill.style.width = '30%';
 
@@ -315,7 +456,7 @@
 
                 if (!response.ok) {
                     const error = await response.json();
-                    throw new Error(error.error || 'Conversion failed');
+                    throw new Error(error.error || 'Conversion process failed.');
                 }
 
                 progressFill.style.width = '100%';
@@ -327,17 +468,23 @@
                 document.body.appendChild(a);
                 a.click();
                 window.URL.revokeObjectURL(url);
-                showStatus('Success! Check your downloads.', 'success');
+                showStatus('SUCCESS: Conversion complete. Check downloads directory.', 'success');
             } catch (error) {
-                showStatus(error.message, 'error');
+                showStatus('CRITICAL ERROR: ' + error.message, 'error');
+                progressFill.style.background = '#fff'; // Visual error indicator in bar
             } finally {
                 convertBtn.disabled = false;
-                setTimeout(() => progressBar.classList.remove('show'), 3000);
+                convertBtn.textContent = "CONVERT";
+                setTimeout(() => {
+                    progressBar.classList.remove('show');
+                    progressFill.style.width = '0%';
+                    progressFill.style.background = 'var(--accent-color)'; // Reset bar color
+                }, 3000);
             }
         });
 
         function showStatus(msg, type) {
-            status.textContent = msg;
+            status.textContent = '> ' + msg;
             status.className = 'status show ' + type;
         }
 
