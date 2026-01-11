@@ -1,4 +1,4 @@
-# ReeSaber Converter
+<h1><img src="/assets/reesaber_converter_icon.png" alt="ReeSaber Icon" width="110" align="center"> ReeSaber Converter</h1>
 
 Convert Beat Saber .saber files to ReeSabers format with a single click.
 
