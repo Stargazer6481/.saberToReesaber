@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReeSaber Converter (BETA)</title>
-    <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -35,14 +35,12 @@
             padding: 40px 20px;
             position: relative;
             overflow-x: hidden;
-            /* Tech grid background */
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
             background-size: 30px 30px;
         }
 
-        /* Subtle scanline overlay */
         body::after {
             content: "";
             position: fixed;
@@ -60,7 +58,6 @@
 
         .container {
             background: var(--container-bg);
-            /* Sharp borders for tech feel */
             border: 2px solid var(--accent-color);
             border-radius: 0; 
             max-width: 750px;
@@ -71,7 +68,6 @@
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
         }
 
-        /* Tech-style corner ornamentation */
         .container::before {
             content: '';
             position: absolute;
@@ -90,7 +86,6 @@
         }
 
         .dev-banner {
-            /* High contrast B&W warning */
             background: var(--accent-color);
             color: var(--bg-color);
             border: 1px solid var(--accent-color);
@@ -105,24 +100,26 @@
             letter-spacing: 1px;
         }
 
-.header-container {
-    display: flex;
-    align-items: center; /* Vertically centers the icon with the text */
-    gap: 12px;           /* Adds space between the icon and the text */
-    margin-bottom: 5px;  /* Adjust spacing to the subtitle below */
-}
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
 
-.header-icon {
-    height: 1.2em;       /* Scales the icon relative to the text size */
-    width: auto;         /* Maintains original aspect ratio */
-}
+        .header-icon {
+            height: 7em;
+            width: auto;
+        }
 
-h1 {
-    margin: 0;           /* Removes default margins that break alignment */
-}
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
 
-        
-        /* Blinking cursor effect */
         h1::after {
             content: '_';
             animation: blink 1s step-end infinite;
@@ -220,6 +217,12 @@ h1 {
             cursor: not-allowed;
         }
 
+        .btn-download {
+            padding: 10px 15px;
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+
         .status {
             margin-top: 25px;
             padding: 15px;
@@ -230,12 +233,10 @@ h1 {
             text-transform: uppercase;
         }
         .status.show { display: block; }
-        /* Monochromatic status indicators */
         .status.processing { background: #111; color: var(--text-main); border-left: 5px solid var(--text-dim); }
         .status.success { background: #111; color: var(--text-main); border-left: 5px solid var(--accent-color); }
         .status.error { background: #fff; color: #000; border-left: 5px solid #000; font-weight: bold;}
 
-        /* Progress Bar - Tech Style */
         .progress-bar {
             width: 100%;
             height: 12px;
@@ -252,12 +253,10 @@ h1 {
             background: var(--accent-color);
             width: 0%;
             transition: width 0.3s linear;
-            /* Digital segmented look */
             background-image: linear-gradient(90deg, transparent 0%, transparent 50%, var(--bg-color) 50%, var(--bg-color) 100%);
             background-size: 10px 100%;
         }
 
-        /* Info & Status Boxes */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -271,7 +270,7 @@ h1 {
             padding: 25px;
             border-radius: 0;
         }
-        /* Removed inline styles in HTML, handled here */
+        
         .info-box.warning-box {
             border: 1px solid var(--accent-color);
         }
@@ -313,6 +312,54 @@ h1 {
             color: var(--bg-color);
         }
 
+        .recent-conversions {
+            margin-top: 30px;
+        }
+
+        .recent-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .recent-item:hover {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .recent-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .recent-item-name {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 0.95em;
+        }
+
+        .recent-item-time {
+            font-size: 0.75em;
+            color: var(--text-dim);
+        }
+
+        .recent-item-stats {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .no-recent {
+            text-align: center;
+            color: var(--text-dim);
+            padding: 30px;
+            font-size: 0.9em;
+        }
+
         .footer {
             margin-top: 40px;
             text-align: center;
@@ -330,12 +377,11 @@ h1 {
             Currently, only <strong>Trails</strong> are 100% functional. Manual tweaking will be required.
         </div>
 
-<div class="header-container">
-    <img src="/assets/reesaber_converter_icon.png" alt="ReeSaber Icon" class="header-icon">
-    <h1>.saber to ReeSaber</h1>
-</div>
-<p class="subtitle">Convert custom .sabers to ReeSaber presets</p>
-
+        <div class="header-container">
+            <img src="assets/reesaber_converter_icon.png" alt="ReeSaber Icon" class="header-icon">
+            <h1>.saber to ReeSaber</h1>
+        </div>
+        <p class="subtitle">Convert custom .sabers to ReeSaber presets</p>
 
         <div class="upload-area" id="uploadArea">
             <div class="upload-text">Drop your .saber file here </div>
@@ -356,6 +402,13 @@ h1 {
         </div>
 
         <div class="status" id="status"></div>
+
+        <div class="info-box recent-conversions">
+            <h3>> Recently Converted</h3>
+            <div id="recentList">
+                <div class="no-recent">Loading recent conversions...</div>
+            </div>
+        </div>
 
         <div class="info-grid">
             <div class="info-box warning-box">
@@ -391,7 +444,7 @@ h1 {
     </div>
 
     <script>
-        const API_URL = 'https://reesaber-convert-backend.onrender.com/convert';
+        const API_URL = 'https://reesaber-convert-backend.onrender.com';
         
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
@@ -402,21 +455,23 @@ h1 {
         const status = document.getElementById('status');
         const progressBar = document.getElementById('progressBar');
         const progressFill = document.getElementById('progressFill');
+        const recentList = document.getElementById('recentList');
 
         let selectedFile = null;
+
+        // Load recent conversions on page load
+        loadRecentConversions();
 
         uploadArea.addEventListener('click', () => fileInput.click());
 
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            // Tech style hover effect in JS
             uploadArea.style.borderColor = "#ffffff";
             uploadArea.style.backgroundColor = "#ffffff";
             uploadArea.style.color = "#000000";
         });
 
         uploadArea.addEventListener('dragleave', () => {
-            // Reset style
             uploadArea.style.borderColor = "var(--border-color)";
             uploadArea.style.backgroundColor = "rgba(255, 255, 255, 0.02)";
             uploadArea.style.color = "var(--text-main)";
@@ -424,8 +479,7 @@ h1 {
 
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-             // Reset style on drop
-             uploadArea.style.borderColor = "var(--border-color)";
+            uploadArea.style.borderColor = "var(--border-color)";
             uploadArea.style.backgroundColor = "rgba(255, 255, 255, 0.02)";
             uploadArea.style.color = "var(--text-main)";
 
@@ -462,7 +516,7 @@ h1 {
             formData.append('file', selectedFile);
 
             try {
-                const response = await fetch(API_URL, { method: 'POST', body: formData });
+                const response = await fetch(`${API_URL}/convert`, { method: 'POST', body: formData });
                 progressFill.style.width = '70%';
 
                 if (!response.ok) {
@@ -480,19 +534,83 @@ h1 {
                 a.click();
                 window.URL.revokeObjectURL(url);
                 showStatus('SUCCESS: Conversion complete. Check downloads directory.', 'success');
+                
+                // Reload recent conversions
+                setTimeout(() => loadRecentConversions(), 1000);
             } catch (error) {
                 showStatus('CRITICAL ERROR: ' + error.message, 'error');
-                progressFill.style.background = '#fff'; // Visual error indicator in bar
+                progressFill.style.background = '#fff';
             } finally {
                 convertBtn.disabled = false;
                 convertBtn.textContent = "CONVERT";
                 setTimeout(() => {
                     progressBar.classList.remove('show');
                     progressFill.style.width = '0%';
-                    progressFill.style.background = 'var(--accent-color)'; // Reset bar color
+                    progressFill.style.background = 'var(--accent-color)';
                 }, 3000);
             }
         });
+
+        async function loadRecentConversions() {
+            try {
+                const response = await fetch(`${API_URL}/recent`);
+                const conversions = await response.json();
+                
+                if (conversions.length === 0) {
+                    recentList.innerHTML = '<div class="no-recent">No recent conversions yet</div>';
+                    return;
+                }
+                
+                recentList.innerHTML = conversions.map(conv => {
+                    const date = new Date(conv.timestamp);
+                    const timeAgo = getTimeAgo(date);
+                    const fileSize = (conv.file_size / 1024 / 1024).toFixed(2);
+                    
+                    return `
+                        <div class="recent-item">
+                            <div class="recent-item-header">
+                                <div class="recent-item-name">${escapeHtml(conv.name)}</div>
+                                <div class="recent-item-time">${timeAgo}</div>
+                            </div>
+                            <div class="recent-item-stats">
+                                > MESHES: ${conv.mesh_count} | TEXTURES: ${conv.texture_count} | SIZE: ${fileSize} MB
+                            </div>
+                            <button class="btn btn-download" onclick="downloadRecent('${escapeHtml(conv.zip_filename)}')">
+                                DOWNLOAD ZIP
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                recentList.innerHTML = '<div class="no-recent">Failed to load recent conversions</div>';
+                console.error('Error loading recent conversions:', error);
+            }
+        }
+
+        function downloadRecent(filename) {
+            showStatus('ERROR: Download from history not yet implemented. Please re-convert the file.', 'error');
+            // Note: For full implementation, you'd need to store the ZIP files on the server
+            // and create a download endpoint
+        }
+
+        function getTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            
+            if (seconds < 60) return 'just now';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes}m ago`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours}h ago`;
+            const days = Math.floor(hours / 24);
+            if (days < 7) return `${days}d ago`;
+            return date.toLocaleDateString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         function showStatus(msg, type) {
             status.textContent = '> ' + msg;
