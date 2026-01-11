@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReeSaber Converter (BETA)</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -104,16 +105,22 @@
             letter-spacing: 1px;
         }
 
-        h1 {
-            font-size: 2.5em;
-            font-weight: 700;
-            background: none;
-            -webkit-text-fill-color: initial;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+.header-container {
+    display: flex;
+    align-items: center; /* Vertically centers the icon with the text */
+    gap: 12px;           /* Adds space between the icon and the text */
+    margin-bottom: 5px;  /* Adjust spacing to the subtitle below */
+}
+
+.header-icon {
+    height: 1.2em;       /* Scales the icon relative to the text size */
+    width: auto;         /* Maintains original aspect ratio */
+}
+
+h1 {
+    margin: 0;           /* Removes default margins that break alignment */
+}
+
         
         /* Blinking cursor effect */
         h1::after {
@@ -323,8 +330,12 @@
             Currently, only <strong>Trails</strong> are 100% functional. Manual tweaking will be required.
         </div>
 
-        <h1>.saber to ReeSaber</h1>
-        <p class="subtitle">Convert custom .sabers to ReeSaber presets</p>
+<div class="header-container">
+    <img src="/assets/reesaber_converter_icon.png" alt="ReeSaber Icon" class="header-icon">
+    <h1>.saber to ReeSaber</h1>
+</div>
+<p class="subtitle">Convert custom .sabers to ReeSaber presets</p>
+
 
         <div class="upload-area" id="uploadArea">
             <div class="upload-text">Drop your .saber file here </div>
